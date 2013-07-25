@@ -36,6 +36,10 @@ module.exports = function (grunt) {
       coffeeTest: {
         files: ['test/spec/{,*/}*.coffee'],
         tasks: ['coffee:test']
+      },
+      typescript: {
+        files: ['<%= yeoman.app %>/scripts/{,*/}*.ts'],
+        tasks: ['typescript:dist']
       },<% if (compassBootstrap) { %>
       compass: {
         files: ['<%%= yeoman.app %>/styles/{,*/}*.{scss,sass}'],
@@ -136,6 +140,34 @@ module.exports = function (grunt) {
           ext: '.js'
         }]
       }
+    },
+    typescript: {
+		dist: {
+		    cwd: '<%%= yeoman.app %>/scripts',
+			src: '{,*/}*.ts',
+			dest: '.tmp/scripts',
+			options: {
+			  module: 'amd', //or commonjs
+			  target: 'es5', //or es3/es5
+			  base_path: '<%= yeoman.app %>/scripts',
+			  // sourcemap: true,
+			  // fullSourceMapPath: true,
+			  // declaration: true,
+			}
+		},
+		test: {
+		    cwd: 'test/spec',
+			src: '{,*/}*.ts',
+			dest: '.tmp/spec',
+			options: {
+			  module: 'amd', //or commonjs
+			  target: 'es5', //or es3/es5
+			  base_path: '<%= yeoman.app %>/scripts',
+			  // sourcemap: true,
+			  // fullSourceMapPath: true,
+			  // declaration: true,
+			}
+		}
     },<% if (compassBootstrap) { %>
     compass: {
       options: {
@@ -269,15 +301,18 @@ module.exports = function (grunt) {
     },
     concurrent: {
       server: [
-        'coffee:dist'<% if (compassBootstrap) { %>,
+        'coffee:dist',
+        'typescript:dist',<% if (compassBootstrap) { %>,
         'compass:server'<% } %>
       ],
       test: [
-        'coffee'<% if (compassBootstrap) { %>,
+        'coffee'
+        'typescript',<% if (compassBootstrap) { %>,
         'compass'<% } %>
       ],
       dist: [
-        'coffee',<% if (compassBootstrap) { %>
+        'coffee',
+        'typescript:dist',<% if (compassBootstrap) { %>
         'compass:dist',<% } %>
         'imagemin',
         'svgmin',
@@ -313,6 +348,15 @@ module.exports = function (grunt) {
           ]
         }
       }
+    },
+    htmlrefs: {
+      dist: {
+        src: '<%= yeoman.dist %>/**/*.html',
+        /** @optional  - references external files to be included */
+        includes: {
+            analytics: '<%= yeoman.app %>/static/ga.in' // in this case it's google analytics
+            }
+        }
     }
   });
 
