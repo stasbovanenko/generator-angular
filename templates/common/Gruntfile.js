@@ -38,7 +38,7 @@ module.exports = function (grunt) {
         tasks: ['coffee:test']
       },
       typescript: {
-        files: ['<%= yeoman.app %>/scripts/{,*/}*.ts'],
+        files: ['<%%= yeoman.app %>/scripts/{,*/}*.ts'],
         tasks: ['typescript:dist']
       },<% if (compassBootstrap) { %>
       compass: {
@@ -143,26 +143,12 @@ module.exports = function (grunt) {
     },
     typescript: {
 		dist: {
-		    cwd: '<%%= yeoman.app %>/scripts',
-			src: '{,*/}*.ts',
-			dest: '.tmp/scripts',
+		     src: '<%%= yeoman.app %>/scripts/{,*/}*.ts',
+           dest: '.tmp/scripts',
 			options: {
 			  module: 'amd', //or commonjs
 			  target: 'es5', //or es3/es5
-			  base_path: '<%= yeoman.app %>/scripts',
-			  // sourcemap: true,
-			  // fullSourceMapPath: true,
-			  // declaration: true,
-			}
-		},
-		test: {
-		    cwd: 'test/spec',
-			src: '{,*/}*.ts',
-			dest: '.tmp/spec',
-			options: {
-			  module: 'amd', //or commonjs
-			  target: 'es5', //or es3/es5
-			  base_path: '<%= yeoman.app %>/scripts',
+			  base_path: '<%%= yeoman.app %>/scripts',
 			  // sourcemap: true,
 			  // fullSourceMapPath: true,
 			  // declaration: true,
@@ -302,17 +288,17 @@ module.exports = function (grunt) {
     concurrent: {
       server: [
         'coffee:dist',
-        'typescript:dist',<% if (compassBootstrap) { %>,
+        'typescript:dist'<% if (compassBootstrap) { %>,
         'compass:server'<% } %>
       ],
       test: [
-        'coffee'
-        'typescript',<% if (compassBootstrap) { %>,
+        'coffee',
+        'typescript'<% if (compassBootstrap) { %>,
         'compass'<% } %>
       ],
       dist: [
         'coffee',
-        'typescript:dist',<% if (compassBootstrap) { %>
+        'typescript:dist'<% if (compassBootstrap) { %>,
         'compass:dist',<% } %>
         'imagemin',
         'svgmin',

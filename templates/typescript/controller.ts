@@ -6,8 +6,7 @@ module <%= _.camelize(appname) %>.Controllers {
         awesomeThings: string[];
     }
     class <%= _.classify(name) %> {
-        count: number = 10;
-        private static $inject = ['$scope', 'fullNameService', '$location'];
+        private static $inject = ['$scope'];
         constructor($scope: I<%= _.classify(name) %>Scope){
             $scope.awesomeThings = [
                 'HTML5 Boilerplate',
@@ -18,5 +17,5 @@ module <%= _.camelize(appname) %>.Controllers {
             ];
         }
     }
-    main.controller("<%= _.camelize(appname) %>.Controllers.<%= _.classify(name) %>", <%= _.classify(name) %>);
+    app.controller("<%= _.camelize(appname) %>.Controllers.<%= _.classify(name) %>", <%= _.classify(name) %>);
 }

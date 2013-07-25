@@ -35,11 +35,27 @@ var Generator = module.exports = function Generator(args, options) {
 
     this.env.options.coffee = this.options.coffee;
   }
+  if (typeof this.env.options.typescript === 'undefined') {
+    this.option('typescript');
+
+    // attempt to detect if user is using CS or not
+    // if cml arg provided, use that; else look for the existence of cs
+    if (!this.options.typescript &&
+        this.expandFiles(path.join(this.appPath, '/scripts/**/*.ts'), {}).length > 0) {
+        this.options.typescript = true;
+    }
+
+    this.env.options.typescript = this.options.typescript;
+  }
 
   if (typeof this.env.options.minsafe === 'undefined') {
     this.option('minsafe');
     this.env.options.minsafe = this.options.minsafe;
     args.push('--minsafe');
+  }
+
+  if (this.env.options.typescript) {
+    args.push('--typescript');
   }
 
   this.hookFor('angular:common', {
@@ -169,7 +185,7 @@ Generator.prototype.bootstrapJS = function bootstrapJS() {
 
   // Wire Twitter Bootstrap plugins
   this.indexFile = this.appendScripts(this.indexFile, 'scripts/plugins.js', [
-    'bower_components/bootstrap-sass/js/bootstrap-affix.js',
+   /* 'bower_components/bootstrap-sass/js/bootstrap-affix.js',
     'bower_components/bootstrap-sass/js/bootstrap-alert.js',
     'bower_components/bootstrap-sass/js/bootstrap-dropdown.js',
     'bower_components/bootstrap-sass/js/bootstrap-tooltip.js',
@@ -180,8 +196,8 @@ Generator.prototype.bootstrapJS = function bootstrapJS() {
     'bower_components/bootstrap-sass/js/bootstrap-typeahead.js',
     'bower_components/bootstrap-sass/js/bootstrap-carousel.js',
     'bower_components/bootstrap-sass/js/bootstrap-scrollspy.js',
-    'bower_components/bootstrap-sass/js/bootstrap-collapse.js',
-    'bower_components/bootstrap-sass/js/bootstrap-tab.js'
+    'bower_components/bootstrap-sass/js/bootstrap-collapse.js',   */
+    'bower_components/angular-bootstrap/ui-bootstrap.js'
   ]);
 };
 
