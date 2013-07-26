@@ -143,8 +143,8 @@ module.exports = function (grunt) {
     },
     typescript: {
 		dist: {
-		     src: '<%%= yeoman.app %>/scripts/{,*/}*.ts',
-           dest: '.tmp/scripts',
+		    src: '<%%= yeoman.app %>/scripts/{,*/}*.ts',
+            dest: '.tmp/scripts',
 			options: {
 			  module: 'amd', //or commonjs
 			  target: 'es5', //or es3/es5
