@@ -334,15 +334,6 @@ module.exports = function (grunt) {
           ]
         }
       }
-    },
-    htmlrefs: {
-      dist: {
-        src: '<%= yeoman.dist %>/**/*.html',
-        /** @optional  - references external files to be included */
-        includes: {
-            analytics: '<%= yeoman.app %>/static/ga.in' // in this case it's google analytics
-            }
-        }
     }
   });
 
@@ -377,8 +368,8 @@ module.exports = function (grunt) {
     'ngmin',
     'cssmin',
     'uglify',
-    'rev',
-    'usemin'
+    'usemin',
+    'rev'
   ]);
 
   grunt.registerTask('default', [
