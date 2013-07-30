@@ -1,3 +1,27 @@
+<a name="v0.1.2"></a>
+### v0.1.2 (2013-07-29)
+
+
+#### Bug Fixes
+
+* **readme:** Remove `yo` installation step ([21f00e50](http://github.com/SpeedShifter/generator-angular/commit/21f00e50571d272d19aea1431177f2d7157ee7be))
+
+<a name="v0.1.1"></a>
+### v0.1.1 (2013-07-29)
+
+
+#### Bug Fixes
+
+* **readme:** Remove `yo` installation step ([21f00e50](http://github.com/SpeedShifter/generator-angular/commit/21f00e50571d272d19aea1431177f2d7157ee7be))
+
+<a name="v0.1.0"></a>
+## v0.1.0 (2013-07-29)
+
+
+#### Bug Fixes
+
+* **readme:** Remove `yo` installation step ([21f00e50](http://github.com/SpeedShifter/generator-angular/commit/21f00e50571d272d19aea1431177f2d7157ee7be))
+
 <a name="v0.3.1"></a>
 ## v0.3.1 (2013-07-24)
 
