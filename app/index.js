@@ -35,17 +35,19 @@ var Generator = module.exports = function Generator(args, options) {
 
     this.env.options.coffee = this.options.coffee;
   }
+  
   if (typeof this.env.options.typescript === 'undefined') {
     this.option('typescript');
 
-    // attempt to detect if user is using CS or not
-    // if cml arg provided, use that; else look for the existence of cs
+    // attempt to detect if user is using TS or not
+    // if cml arg provided, use that; else look for the existence of ts
     if (!this.options.typescript &&
         this.expandFiles(path.join(this.appPath, '/scripts/**/*.ts'), {}).length > 0) {
         this.options.typescript = true;
     }
 
     this.env.options.typescript = this.options.typescript;
+	args.push('--typescript');
   }
 
   if (typeof this.env.options.minsafe === 'undefined') {
@@ -54,19 +56,15 @@ var Generator = module.exports = function Generator(args, options) {
     args.push('--minsafe');
   }
 
-  if (this.env.options.typescript) {
-    args.push('--typescript');
-  }
-
-  this.hookFor('angular:common', {
+  this.hookFor('tsangular:common', {
     args: args
   });
 
-  this.hookFor('angular:main', {
+  this.hookFor('tsangular:main', {
     args: args
   });
 
-  this.hookFor('angular:controller', {
+  this.hookFor('tsangular:controller', {
     args: args
   });
 
@@ -75,6 +73,7 @@ var Generator = module.exports = function Generator(args, options) {
     options: {
       options: {
         coffee: this.options.coffee,
+        typescript: this.options.typescript,
         travis: true,
         'skip-install': this.options['skip-install']
        }

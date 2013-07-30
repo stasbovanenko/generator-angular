@@ -43,16 +43,16 @@ function Generator() {
   }
 
   if (typeof this.env.options.typescript === 'undefined') {
-        this.option('typescript');
+	this.option('typescript');
 
-        // attempt to detect if user is using TS or not
-        // if cml arg provided, use that; else look for the existence of ts
-        if (!this.options.typescript &&
-            this.expandFiles(path.join(this.env.options.appPath, '/scripts/**/*.ts'), {}).length > 0) {
-            this.options.typescript = true;
-        }
+	// attempt to detect if user is using TS or not
+	// if cml arg provided, use that; else look for the existence of ts
+	if (!this.options.typescript &&
+		this.expandFiles(path.join(this.env.options.appPath, '/scripts/**/*.ts'), {}).length > 0) {
+		this.options.typescript = true;
+	}
 
-        this.env.options.typescript = this.options.typescript;
+	this.env.options.typescript = this.options.typescript;
   }
 
   if (typeof this.env.options.minsafe === 'undefined') {
